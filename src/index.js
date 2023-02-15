@@ -1,9 +1,7 @@
 import './style.css';
 
-
 const BASE_URL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'MQomAQGD2c0JHxU5tUHT';
-
 
 const fetchMeals = async (l) => {
   try {
@@ -14,7 +12,6 @@ const fetchMeals = async (l) => {
     return err;
   }
 };
-
 
 const postComment = async (comment) => {
   try {
@@ -30,7 +27,6 @@ const postComment = async (comment) => {
   }
 };
 
-
 const fetchComment = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}/${APP_ID}/comments?item_id=${id}`);
@@ -44,23 +40,18 @@ const fetchComment = async (id) => {
   }
 };
 
-
 const links = document.getElementById('links');
 
-
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
 
 alphabet.split('').forEach((a) => {
   links.innerHTML += ` <button type="button" id="${a}">${a}</button>`;
 });
 
-
 const commentsPopup = async (meal) => {
   const main = document.querySelector('main');
   const popupDiv = document.createElement('div');
   popupDiv.setAttribute('class', 'popup');
-
 
   popupDiv.innerHTML = `
   <button type="button" id="close">&times;</button>
@@ -78,11 +69,9 @@ const commentsPopup = async (meal) => {
   </form>`;
   main.append(popupDiv);
 
-
   document.getElementById('close').addEventListener('click', () => {
     main.removeChild(popupDiv);
   });
-
 
   document.getElementById('post-comment').addEventListener('click', (e) => {
     e.preventDefault();
@@ -95,16 +84,13 @@ const commentsPopup = async (meal) => {
     }
   });
 
-
   const comments = await fetchComment(meal.idMeal);
   comments.forEach((c) => {
     document.getElementById('all-comments').innerHTML += `<li>${c.creation_date} ${c.username}: ${c.comment}</li>`;
   });
 };
 
-
 const mealsSection = document.getElementById('meals');
-
 
 const showMeals = (meals) => {
   if (!meals) {
@@ -133,7 +119,6 @@ const showMeals = (meals) => {
   });
 };
 
-
 const displayMeals = async () => {
   let letter = 's';
   const meals = await fetchMeals(letter);
@@ -148,8 +133,4 @@ const displayMeals = async () => {
   });
 };
 
-
 displayMeals();
-
-
-
