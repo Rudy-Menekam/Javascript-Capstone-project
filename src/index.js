@@ -25,6 +25,7 @@ const postComment = async (comment) => {
   } catch (err) {
     return err;
   }
+  return null;
 };
 
 const fetchComment = async (id) => {
@@ -113,7 +114,7 @@ const showMeals = (meals) => {
         </div>
       </div>`;
     mealsSection.append(div);
-    document.getElementById(`${meal.idMeal}`).addEventListener('click', (e) => {
+    document.getElementById(`${meal.idMeal}`).addEventListener('click', () => {
       commentsPopup(meal);
     });
   });
