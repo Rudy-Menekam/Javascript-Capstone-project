@@ -2,6 +2,9 @@ import './style.css';
 import fetchLikes from './modules/fetchLikes.js';
 import addLikes from './modules/addLikes.js';
 import mealCount from './modules/mealCount.js';
+import postComment from './modules/postcomments.js';
+import commentsCounter from './modules/commentscounter.js';
+import displayComments from './modules/displayComments';
 
 const BASE_URL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'MQomAQGD2c0JHxU5tUHT';
@@ -11,29 +14,6 @@ const fetchMeals = async (l) => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${l}`);
     const data = await response.json();
     return data.meals;
-  } catch (err) {
-    return err;
-  }
-};
-
-const postComment = async (comment) => {
-  await fetch(`${BASE_URL}/${APP_ID}/comments`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(comment),
-  });
-};
-
-const fetchComment = async (id) => {
-  try {
-    const response = await fetch(`${BASE_URL}/${APP_ID}/comments?item_id=${id}`);
-    if (response.ok) {
-      const data = response.json();
-      return data;
-    }
-    return [];
   } catch (err) {
     return err;
   }
@@ -60,7 +40,7 @@ const commentsPopup = async (meal) => {
       <li>${meal.strCategory}</li>
       <li>${meal.strArea}</li>
      </ul>
-     <h3 id="c-count">Comments(<span class="total"></span>)</h3>
+     <h3 id="c-count">Comments(<span id="c-total"></span>)</h3>
     <ul id="all-comments"></ul>
   <form id="comment-form">
   <h3>Add a comments</h3>
@@ -90,12 +70,9 @@ const commentsPopup = async (meal) => {
       postComment({ item_id, username, comment });
       document.queryselector('form').reset();
     }
-  });
 
-  const comments = await fetchComment(meal.idMeal);
-  comments.forEach((c) => {
-    document.getElementById('all-comments').innerHTML += `<li>${c.creation_date} ${c.username}: ${c.comment}</li>`;
   });
+  displayComments(meal.idMeal);
 };
 
 const mealsSection = document.getElementById('meals');
@@ -104,7 +81,7 @@ const showMeals = async (meals) => {
   const likes = await fetchLikes();
 
   if (!meals) {
-    document.querySelector('.foods-no').textContent = 'All foods(0)';
+    document.querySelector('#num').textContent = 'Menu (0)';
     mealsSection.innerHTML = '<p>No meals available starting with that letter</p>';
     return;
   }

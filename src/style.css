@@ -63,6 +63,10 @@ body {
   justify-content: space-between;
 }
 
+#meals > p {
+  color: #fff;
+}
+
 .meal-image {
   border-radius: 0.5rem;
   height: 69%;
@@ -176,7 +180,7 @@ footer {
 }
 
 #num {
-  color: white;
+  color: rgb(255, 255, 255);
   padding-top: 21px;
   padding-bottom: 28px;
   padding-left: 20px;
