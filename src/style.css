@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+
+* {
+  font-family: "Lato", sans-serif;
+  box-sizing: border-box;
+}
+
 .nav-bar {
   background-color: #30816c;
   color: #0b0b0b;
@@ -8,15 +15,21 @@
   padding: 0 30px;
 }
 
-#logo {
-  height: 50px;
-  width: 120px;
+.logo {
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
 }
 
 .nav-list {
   list-style-type: none;
   display: flex;
   gap: 2rem;
+}
+
+.li-links {
+  text-decoration: none;
+  color: white;
 }
 
 .li-items:hover {
@@ -34,19 +47,15 @@
 }
 
 .meal {
-  height: 72vh;
+  height: 26rem;
   width: 100%;
-  background-size: cover;
-  vertical-align: middle;
-  border-left: 0.2rem solid hsl(43, 6%, 23%);
-  border-right: 0.2rem solid #4b4840;
-  border-top: 0.2rem solid hsl(43, 6%, 23%);
-  border-bottom: 0.2rem solid #4b4840;
+  border: 0.1rem solid #d7d7d7;
   box-sizing: border-box;
+  background-color: antiquewhite;
 }
 
 .meal-image {
-  height: 69%;
+  height: 58%;
   width: 100%;
   position: relative;
   background-size: cover;
@@ -54,22 +63,16 @@
   box-sizing: border-box;
 }
 
-.meal-name {
-  position: absolute;
-  right: 0;
-  margin: 100px;
-  margin-top: 300px;
-}
+/* .meal-name {
+  display: flex;
+  /* margin-right: 32px;
+  margin-top: 252px; */
+
+/* position: absolute; */
 
 .involvement {
-  display: flex;
-  justify-content: space-around;
   width: 100%;
-  color: rgb(27, 4, 42);
-  background-color: white;
-
-  /* background-color: rgb(31, 57, 23); */
-  margin-top: 16px;
+  padding: 4px;
 }
 
 #meal.idMeal {
@@ -78,26 +81,28 @@
 
 .popup {
   position: fixed;
-  top: 2%;
-  left: 15%;
-  height: 70vh;
-  width: 60vw;
+  padding-bottom: 20px;
+  top: 4%;
+  left: 25%;
+  height: 88vh;
+  width: 58rem;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #30816c;
+  background-color: antiquewhite;
 }
 
 .popup-image {
-  width: 80%;
-  height: 50vh;
+  width: 100%;
+  height: 69%;
   background-size: cover;
 }
 
 .popup form {
   display: flex;
+  gap: 11px;
   flex-direction: column;
   align-items: flex-start;
 }
@@ -121,9 +126,25 @@ footer {
   padding: 20px 0;
 }
 
-/* #close {
+#close {
+  position: absolute;
+  margin-bottom: 85%;
+  margin-left: 90%;
+}
+
+#horiz-name {
   display: flex;
-  justify-content: end;
-  align-items: end;
-  border: 1px solid red;
-} */
+  gap: 84px;
+  list-style-type: none;
+  font-weight: bold;
+}
+
+.comments {
+  width: 98%;
+  height: 50px;
+  font-weight: bold;
+  background-color: #30816c;
+  color: white;
+  border: none;
+  margin-top: 32px;
+}

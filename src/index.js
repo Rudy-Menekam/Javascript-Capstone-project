@@ -1,9 +1,16 @@
 import './style.css';
+// import MyImage from '.image/logofood.jpg'
 // import { fetchLike, newLike } from './modules/fetchLikes.js';
 import mealCount from './modules/mealCount.js';
 
 const BASE_URL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'MQomAQGD2c0JHxU5tUHT';
+
+//  // Add the image to our existing div.
+//  const MyImage = new Image();
+//  MyImage.src = Icon;
+
+//  element.appendChild(MyImage);
 
 const fetchMeals = async (l) => {
   try {
@@ -59,18 +66,23 @@ const commentsPopup = async (meal) => {
   popupDiv.innerHTML = `
   <button type="button" id="close">&times;</button>
   <div class="popup-image" style="background-image: url(${meal.strMealThumb});"></div>
-    <ul>
+    <ul id="horiz-name">
       <li>${meal.strMeal}</li>
       <li>${meal.strCategory}</li>
       <li>${meal.strArea}</li>
      </ul>
+     <h3>Comments(<span class="total"></span>)</h3>
     <ul id="all-comments"></ul>
   <form id="comment-form">
+  <h3>Add a comments</h3>
     <input type="text" id="username" placeholder="username" name="username" required>
     <textarea name="comment" id="comment" placeholder="Enter your comment..." cols="30" rows="4" required></textarea>
     <button type="button" id="post-comment">Comment</button>
   </form>`;
   main.append(popupDiv);
+  const comment = document.querySelector('#all-comments');
+  const num = document.querySelector('.total');
+  mealCount(comment, num);
 
   document.getElementById('close').addEventListener('click', () => {
     main.removeChild(popupDiv);
@@ -106,12 +118,12 @@ const showMeals = (meals) => {
     div.innerHTML = `
       <div class="meal">
         <div class="meal-image" style="background-image: url(${meal.strMealThumb});">
-          <p class="meal-name">${meal.strMeal}</p>
         </div>
         <div class="involvement">
+        <p class="meal-name">${meal.strMeal}</p>
           <p class="likes">
            <i class="bi bi-heart-fill" id="heart" type="button"></i>
-           <span class="likes-count">0</span>likes
+           <span class="likes-count">0</span> likes
           </p>
           <button type="button" id="${meal.idMeal}" class="comments">Comments</button>
         </div>
