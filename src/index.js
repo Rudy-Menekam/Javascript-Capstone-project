@@ -1,16 +1,10 @@
 import './style.css';
-// import MyImage from '.image/logofood.jpg'
-// import { fetchLike, newLike } from './modules/fetchLikes.js';
+import fetchLikes from './modules/fetchLikes.js';
+import addLikes from './modules/addLikes.js';
 import mealCount from './modules/mealCount.js';
 
 const BASE_URL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'MQomAQGD2c0JHxU5tUHT';
-
-//  // Add the image to our existing div.
-//  const MyImage = new Image();
-//  MyImage.src = Icon;
-
-//  element.appendChild(MyImage);
 
 const fetchMeals = async (l) => {
   try {
@@ -107,47 +101,50 @@ const commentsPopup = async (meal) => {
 
 const mealsSection = document.getElementById('meals');
 
-const showMeals = (meals) => {
+const showMeals = async (meals) => {
+  const likes = await fetchLikes();
+
   if (!meals) {
+    document.querySelector('.foods-no').textContent = 'All foods(0)';
     mealsSection.innerHTML = '<p>No meals available starting with that letter</p>';
     return;
   }
+  // document.querySelector('.foods-no').textContent = `All foods(${meals.length})`;
   meals.forEach((meal) => {
+    const like = likes.find((l) => l.item_id === meal.idMeal);
+
     const div = document.createElement('div');
-    const wrapper = document.querySelector('#meals');
     div.innerHTML = `
-      <div class="meal">
-        <div class="meal-image" style="background-image: url(${meal.strMealThumb});">
-        </div>
-        <div class="involvement">
-        <p class="meal-name">${meal.strMeal}</p>
-          <p class="likes">
-           <i class="bi bi-heart-fill" id="heart" type="button"></i>
-           <span class="likes-count">0</span> likes
-          </p>
-          <button type="button" id="${meal.idMeal}" class="comments">Comments</button>
-        </div>
-      </div>`;
+  	<div class="meal">
+    	<div class="meal-image" style="background-image: url(${meal.strMealThumb});">
+    	</div>
+    	<div class="meal-details">
+      	<p class="meal-name">${meal.strMeal}</p>
+      	<p class="likes">
+        	<i class="bi bi-heart-fill" id="l${meal.idMeal}" type="button"></i>
+        	<span class="likes-count">${like ? like.likes : 0}</span> Likes
+      	</p>
+    	</div>
+    	<div class="involvement">
+      	<button type="button" id="${meal.idMeal}" class="comments">Comments</button>
+    	</div>
+  	</div>`;
     mealsSection.append(div);
     document.getElementById(`${meal.idMeal}`).addEventListener('click', () => {
       commentsPopup(meal);
     });
 
-    // const list = document.createElement('li');
-    // div.setAttribute('data-id', meal.idMeal);
-    // div.classList.add('list');
-    // div.innerHTML = div;
-    // wrapper.appendChild(div);
-
-    const num = document.querySelector('.total');
-    mealCount(wrapper, num);
-
-    // const heart = document.querySelectorAll('#heart');
-    // const card = document.querySelectorAll('.list');
-    // fetchLike(card);
-    // newLike(heart, index, meal.idMeal);
-  // });
+    document.getElementById(`l${meal.idMeal}`).addEventListener('click', () => {
+      addLikes({ item_id: meal.idMeal });
+      let num = +document.getElementById(`l${meal.idMeal}`).nextSibling.nextSibling.textContent;
+      num += 1;
+      document.getElementById(`l${meal.idMeal}`).nextSibling.nextSibling.textContent = num;
+    });
   });
+
+  const num = document.querySelector('.total');
+  const wrapper = document.querySelector('#meals');
+  mealCount(wrapper, num);
 };
 
 const displayMeals = async () => {
