@@ -29,7 +29,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 15px;
-   width: 100%;
+  width: 100%;
   padding: 20px;
 }
 
@@ -67,12 +67,13 @@
   width: 100%;
   color: rgb(27, 4, 42);
   background-color: white;
+
   /* background-color: rgb(31, 57, 23); */
   margin-top: 16px;
 }
 
 #meal.idMeal {
-border: 1px solid red;
+  border: 1px solid red;
 }
 
 .popup {

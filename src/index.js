@@ -1,9 +1,9 @@
 import './style.css';
-
+// import { fetchLike, newLike } from './modules/fetchLikes.js';
+import mealCount from './modules/mealCount.js';
 
 const BASE_URL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'MQomAQGD2c0JHxU5tUHT';
-
 
 const fetchMeals = async (l) => {
   try {
@@ -14,7 +14,6 @@ const fetchMeals = async (l) => {
     return err;
   }
 };
-
 
 const postComment = async (comment) => {
   try {
@@ -31,7 +30,6 @@ const postComment = async (comment) => {
   return null;
 };
 
-
 const fetchComment = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}/${APP_ID}/comments?item_id=${id}`);
@@ -45,23 +43,18 @@ const fetchComment = async (id) => {
   }
 };
 
-
 const links = document.getElementById('links');
 
-
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
 
 alphabet.split('').forEach((a) => {
   links.innerHTML += ` <button type="button" id="${a}">${a}</button>`;
 });
 
-
 const commentsPopup = async (meal) => {
   const main = document.querySelector('main');
   const popupDiv = document.createElement('div');
   popupDiv.setAttribute('class', 'popup');
-
 
   popupDiv.innerHTML = `
   <button type="button" id="close">&times;</button>
@@ -79,11 +72,9 @@ const commentsPopup = async (meal) => {
   </form>`;
   main.append(popupDiv);
 
-
   document.getElementById('close').addEventListener('click', () => {
     main.removeChild(popupDiv);
   });
-
 
   document.getElementById('post-comment').addEventListener('click', (e) => {
     e.preventDefault();
@@ -96,16 +87,13 @@ const commentsPopup = async (meal) => {
     }
   });
 
-
   const comments = await fetchComment(meal.idMeal);
   comments.forEach((c) => {
     document.getElementById('all-comments').innerHTML += `<li>${c.creation_date} ${c.username}: ${c.comment}</li>`;
   });
 };
 
-
 const mealsSection = document.getElementById('meals');
-
 
 const showMeals = (meals) => {
   if (!meals) {
@@ -114,6 +102,7 @@ const showMeals = (meals) => {
   }
   meals.forEach((meal) => {
     const div = document.createElement('div');
+    const wrapper = document.querySelector('#meals');
     div.innerHTML = `
       <div class="meal">
         <div class="meal-image" style="background-image: url(${meal.strMealThumb});">
@@ -121,8 +110,8 @@ const showMeals = (meals) => {
         </div>
         <div class="involvement">
           <p class="likes">
-           <i class="bi bi-heart-fill" type="button"></i>
-           <span class="likes-count"></span>
+           <i class="bi bi-heart-fill" id="heart" type="button"></i>
+           <span class="likes-count">0</span>likes
           </p>
           <button type="button" id="${meal.idMeal}" class="comments">Comments</button>
         </div>
@@ -131,9 +120,23 @@ const showMeals = (meals) => {
     document.getElementById(`${meal.idMeal}`).addEventListener('click', () => {
       commentsPopup(meal);
     });
+
+    // const list = document.createElement('li');
+    // div.setAttribute('data-id', meal.idMeal);
+    // div.classList.add('list');
+    // div.innerHTML = div;
+    // wrapper.appendChild(div);
+
+    const num = document.querySelector('.total');
+    mealCount(wrapper, num);
+
+    // const heart = document.querySelectorAll('#heart');
+    // const card = document.querySelectorAll('.list');
+    // fetchLike(card);
+    // newLike(heart, index, meal.idMeal);
+  // });
   });
 };
-
 
 const displayMeals = async () => {
   let letter = 's';
@@ -148,6 +151,5 @@ const displayMeals = async () => {
     });
   });
 };
-
 
 displayMeals();
