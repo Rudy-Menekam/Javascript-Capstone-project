@@ -84,61 +84,61 @@ body {
   color: aliceblue;
 }
 
-
 .involvement {
   display: flex;
   background-color: rgb(31, 57, 23);
   box-shadow: 5px 5px 10px rgb(43 73 100);
   border: 1px solid rgb(85, 120, 150);
 }
-  
+
 .bi-heart-fill {
-    font-size: 23px;
-  }
-    
+  font-size: 23px;
+}
+
 .involvement button {
-    font-weight: bolder;
-    font-size: 1.6rem;
-    padding: 1.3rem;
-    background-color: #30816c;
-    border: none;
-    width: 100%;
-  }
+  font-weight: bolder;
+  font-size: 1.6rem;
+  padding: 1.3rem;
+  background-color: #30816c;
+  border: none;
+  width: 100%;
+}
 
 .popup {
+  padding-bottom: 90px;
+  top: 4%;
+  left: 25%;
+  height: 88vh;
+  width: 58rem;
   overflow-y: auto;
   overflow-x: hidden;
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background-color: rgb(15, 80, 108);
   z-index: 1;
-  padding: 1rem;
   border-radius: 1rem;
-  width: 100%;
-  max-width: 600px;
   margin: 1rem auto;
-  scrollbar-color: rgb(255, 255, 255) #1d1d1d00;
-  scrollbar-width: thin;
 }
 
 .popup-image {
-  width: 90%;
-  height: 50%;
-  object-fit: fill;
+  width: 100%;
+  height: 69%;
   background-size: cover;
 }
 
 .popup form {
   display: flex;
+  gap: 10px;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  padding: 1rem;
+  padding-left: 355px;
   margin-bottom: 1rem;
   border-radius: 1rem;
+}
+
+#all-comments {
+  margin-left: 200px;
+  margin-bottom: 35px;
 }
 
 #links {
@@ -160,8 +160,7 @@ footer {
 
 #close {
   cursor: pointer;
-  margin-bottom: 16px;
-  padding-left: 0;
+  padding-left: 7px;
   float: right;
   font-size: large;
 }
@@ -171,5 +170,19 @@ footer {
   gap: 84px;
   list-style-type: none;
   font-weight: bold;
+  justify-content: center;
+  padding: 24px;
+  color: wheat;
 }
 
+#num {
+  color: white;
+  padding-top: 21px;
+  padding-bottom: 28px;
+  padding-left: 20px;
+}
+
+#c-count {
+  margin-left: 200px;
+  margin-bottom: 20px;
+}

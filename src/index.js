@@ -17,18 +17,13 @@ const fetchMeals = async (l) => {
 };
 
 const postComment = async (comment) => {
-  try {
-    await fetch(`${BASE_URL}/${APP_ID}/comments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(comment),
-    });
-  } catch (err) {
-    return err;
-  }
-  return null;
+  await fetch(`${BASE_URL}/${APP_ID}/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(comment),
+  });
 };
 
 const fetchComment = async (id) => {
@@ -65,18 +60,15 @@ const commentsPopup = async (meal) => {
       <li>${meal.strCategory}</li>
       <li>${meal.strArea}</li>
      </ul>
-     <h3>Comments(<span class="total"></span>)</h3>
+     <h3 id="c-count">Comments(<span class="total"></span>)</h3>
     <ul id="all-comments"></ul>
   <form id="comment-form">
   <h3>Add a comments</h3>
-    <input type="text" id="username" placeholder="username" name="username" required>
-    <textarea name="comment" id="comment" placeholder="Enter your comment..." cols="30" rows="4" required></textarea>
-    <button type="button" id="post-comment">Comment</button>
+  <input type="text" id="username" placeholder="username" name="username" required>
+  <textarea name="comment" id="comment" placeholder="Enter your comment..." cols="30" rows="4" required></textarea>
+  <button type="button" id="post-comment">Comment</button>
   </form>`;
   main.append(popupDiv);
-  const comment = document.querySelector('#all-comments');
-  const num = document.querySelector('.total');
-  mealCount(comment, num);
 
   document.getElementById('close').addEventListener('click', () => {
     main.removeChild(popupDiv);
@@ -86,10 +78,17 @@ const commentsPopup = async (meal) => {
     e.preventDefault();
     const username = document.getElementById('username').value.trim();
     const comment = document.getElementById('comment').value.trim();
+    const date = Date().split(' ').splice(1, 3).join(' ')
+      .split(' ')
+      .reverse();
+    const month = ('JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(date.slice(2).join('')) / 3 + 1);
     // eslint-disable-next-line camelcase
     const item_id = meal.idMeal;
+
     if (username && comment) {
+      document.getElementById('all-comments').innerHTML += `<li>${date[0].concat(`-0${month}-${date[1]}`)} ${username}: ${comment}</li>`;
       postComment({ item_id, username, comment });
+      document.queryselector('form').reset();
     }
   });
 
@@ -109,7 +108,6 @@ const showMeals = async (meals) => {
     mealsSection.innerHTML = '<p>No meals available starting with that letter</p>';
     return;
   }
-  // document.querySelector('.foods-no').textContent = `All foods(${meals.length})`;
   meals.forEach((meal) => {
     const like = likes.find((l) => l.item_id === meal.idMeal);
 
