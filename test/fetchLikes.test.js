@@ -1,4 +1,4 @@
-import fetchLikes from '../src/modules/fetchLikes';
+import fetchLikes from '../src/modules/fetchLikes.js';
 
 const BASE_URL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'MQomAQGD2c0JHxU5tUHT';

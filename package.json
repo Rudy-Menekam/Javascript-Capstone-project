@@ -4,7 +4,7 @@
   "description": "<h3><b>Javascript Capstone Project</b></h3>",
   "private": true,
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "watch": "webpack --watch",
     "start": "webpack serve --open",
     "build": "webpack",

@@ -1,4 +1,4 @@
-import commentsCounter from '../src/modules/commentsCounter';
+import commentsCounter from '../src/modules/commentsCounter.js';
 
 const { JSDOM } = require('jsdom');
 
