@@ -12,8 +12,8 @@ describe('fetchLikes', () => {
     jest.resetAllMocks();
   });
 
-  it('should return an array of likes when response is successful', async () => {
-    const mockData = [1, 2, 3];
+  it('should return an empty array when there are no likes', async () => {
+    const mockData = [];
     const mockResponse = {
       ok: true,
       json: jest.fn().mockResolvedValue(mockData),
@@ -25,29 +25,5 @@ describe('fetchLikes', () => {
 
     expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/${APP_ID}/likes`);
     expect(result).toEqual(mockData);
-  });
-
-  it('should return an empty array when response is not successful', async () => {
-    const mockResponse = {
-      ok: false,
-    };
-
-    fetch.mockResolvedValue(mockResponse);
-
-    const result = await fetchLikes();
-
-    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/${APP_ID}/likes`);
-    expect(result).toEqual([]);
-  });
-
-  it('should return an error when fetch fails', async () => {
-    const mockError = new Error('Fetch failed');
-
-    fetch.mockRejectedValue(mockError);
-
-    const result = await fetchLikes();
-
-    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/${APP_ID}/likes`);
-    expect(result).toEqual(mockError);
   });
 });

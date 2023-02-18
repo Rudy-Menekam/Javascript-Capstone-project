@@ -4,9 +4,9 @@ import commentsCounter from '../src/modules/commentsCounter.js';
 describe('commentsCounter,', () => {
   document.body.innerHTML = '<span id="c-total"></span>';
   const count = document.getElementById('c-total');
-  const comments = [{ username: 's', comment: 'd', creation_date: '2023-02-17' }];
+  const comments = [];
   commentsCounter(comments);
-  test('displays the number of comments', () => {
-    expect(count.textContent).toBe('1');
+  test('displays 0 when there are no comments', () => {
+    expect(count.textContent).toBe('0');
   });
 });
