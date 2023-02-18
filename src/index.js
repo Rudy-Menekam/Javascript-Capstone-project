@@ -3,11 +3,7 @@ import fetchLikes from './modules/fetchLikes.js';
 import addLikes from './modules/addLikes.js';
 import mealCount from './modules/mealCount.js';
 import postComment from './modules/postcomments.js';
-import commentsCounter from './modules/commentscounter.js';
-import displayComments from './modules/displayComments';
-
-const BASE_URL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
-const APP_ID = 'MQomAQGD2c0JHxU5tUHT';
+import displayComments from './modules/displayComments.js';
 
 const fetchMeals = async (l) => {
   try {
@@ -70,7 +66,6 @@ const commentsPopup = async (meal) => {
       postComment({ item_id, username, comment });
       document.queryselector('form').reset();
     }
-
   });
   displayComments(meal.idMeal);
 };

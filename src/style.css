@@ -8,7 +8,6 @@
 
 body {
   font-size: 1.6rem;
-  background-color: rgb(1, 1, 27);
 }
 
 .nav-bar {
@@ -61,10 +60,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: rgb(1, 1, 27);
 }
 
 #meals > p {
-  color: #fff;
+  color: rgb(1, 1, 27);
 }
 
 .meal-image {
@@ -153,13 +153,12 @@ body {
 }
 
 footer {
-  color: white;
   background-color: #30816c;
-  height: 3rem;
-  width: 100%;
-  text-align: center;
-  align-content: center;
+  height: 4rem;
   padding: 20px 0;
+  width: 100%;
+  color: white;
+  text-align: center;
 }
 
 #close {
@@ -180,7 +179,7 @@ footer {
 }
 
 #num {
-  color: rgb(255, 255, 255);
+  color: rgb(1, 1, 27);
   padding-top: 21px;
   padding-bottom: 28px;
   padding-left: 20px;
