@@ -1,13 +1,6 @@
 /** @jest-environment jsdom */
 import commentsCounter from '../src/modules/commentsCounter.js';
 
-// const { JSDOM } = require('jsdom');
-
-// const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
-// const { window } = jsdom;
-// global.window = window;
-// global.document = window.document;
-
 describe('commentsCounter,', () => {
   document.body.innerHTML = '<span id="c-total"></span>';
   const count = document.getElementById('c-total');
