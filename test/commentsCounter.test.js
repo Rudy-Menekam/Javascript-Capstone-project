@@ -1,3 +1,6 @@
+/** 
+  * @jest-environment jsdom
+*/
 import commentsCounter from '../src/modules/commentsCounter.js';
 
 const { JSDOM } = require('jsdom');
