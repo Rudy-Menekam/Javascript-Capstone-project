@@ -21,9 +21,11 @@ body {
 }
 
 .logo {
-  color: white;
+  color: hsl(11deg 52% 89%);
   font-size: 30px;
   font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .nav-list {
