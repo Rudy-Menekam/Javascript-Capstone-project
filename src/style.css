@@ -37,6 +37,7 @@ body {
 .li-links {
   text-decoration: none;
   color: white;
+  font-size: 24px;
 }
 
 .li-items:hover {
